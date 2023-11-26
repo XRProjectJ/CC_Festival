@@ -19,8 +19,11 @@ public class cshChatGpt : MonoBehaviour
             return;
         }
         openAi = new OpenAIApi(apiKey);
-        string prompt = "Hello How are you?";
         //CallGPT(prompt);
+    }
+    public OpenAIApi getOpenAiApi()
+    {
+        return openAi;
     }
 
     // Update is called once per frame
@@ -28,7 +31,7 @@ public class cshChatGpt : MonoBehaviour
     {
         
     }
-    private async void CallGPT(string prompt)
+    public async void CallGPT(string prompt)
     {
         var askMessage = new ChatMessage()
         {
@@ -44,4 +47,5 @@ public class cshChatGpt : MonoBehaviour
         string response = completionResponse.Choices[0].Message.Content;
         Debug.Log(response);
     }
+
 }
