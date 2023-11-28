@@ -14,6 +14,7 @@ public class cshMicrophone : MonoBehaviour
     private OpenAIApi openAi;
     private AudioClip audioClip;
     private string message;
+    private bool isMicOn = false;
     float[] voiceData;
     // Start is called before the first frame update
     void Start()
@@ -31,12 +32,22 @@ public class cshMicrophone : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            microphoneStop();
+            if(isMicOn == true)
+            {
+                microphoneStop();
+                isMicOn = false;
+            }
+            
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            Debug.Log("富窍技夸");
-            microphoneStart();
+            if(isMicOn == false)
+            {
+                Debug.Log("富窍技夸");
+                microphoneStart();
+                isMicOn = true;
+            }
+            
         }
     }
     public bool checkMicrophoneDevice()
