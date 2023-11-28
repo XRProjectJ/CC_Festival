@@ -68,6 +68,7 @@ public class cshMicrophone : MonoBehaviour
         audioClip.GetData(voiceData, 0);
         
     }
+    // async : 비동기작업을 하는 키워드
     public async void microphoneStop()
     {
         
@@ -82,6 +83,7 @@ public class cshMicrophone : MonoBehaviour
             Model = "whisper-1",
             Language = "ko"
         };
+        // await : 비동기 작업에서 작업이 완료될 때까지 대기 하도록 하는 키워드
         var res = await openAi.CreateAudioTranscription(req);
         this.GetComponent<cshChatGpt>().CallGPT(res.Text);
     }
