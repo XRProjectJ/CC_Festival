@@ -38,6 +38,7 @@ public class cshChatGpt : MonoBehaviour
             Role = "user",
             Content = prompt
         };
+        Debug.Log(prompt);
         messages.Add(askMessage);
         var completionResponse = await openAi.CreateChatCompletion(new CreateChatCompletionRequest()
         {
