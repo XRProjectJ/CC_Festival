@@ -49,6 +49,24 @@ public class cshMicrophone : MonoBehaviour
             }
             
         }
+        if (OVRInput.GetDown(OVRInput.Button.One))
+        {
+            if (isMicOn == false)
+            {
+                Debug.Log("말하세요");
+                microphoneStart();
+                isMicOn = true;
+            }
+            
+        }
+        if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
+            if (isMicOn == true)
+            {
+                microphoneStop();
+                isMicOn = false;
+            }
+        }
     }
     public bool checkMicrophoneDevice()
     {
