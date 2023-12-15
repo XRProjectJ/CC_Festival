@@ -18,12 +18,7 @@ public class cshMicrophone : MonoBehaviour
     float[] voiceData;
     // Start is called before the first frame update
     void Start()
-    {
-        if (checkMicrophoneDevice() == true)
-        {
-            
-        }
-        openAi = this.GetComponent<cshChatGpt>().getOpenAiApi();
+    {    
 
     }
 
@@ -112,6 +107,11 @@ public class cshMicrophone : MonoBehaviour
             Model = "whisper-1",
             Language = "ko"
         };
+        if(openAi == null)
+        {
+            openAi = this.GetComponent<cshChatGpt>().getOpenAiApi();
+        }
+
         // await : 비동기 작업에서 작업이 완료될 때까지 대기 하도록 하는 키워드
         var res = await openAi.CreateAudioTranscription(req);
         this.GetComponent<cshChatGpt>().CallGPT(res.Text);

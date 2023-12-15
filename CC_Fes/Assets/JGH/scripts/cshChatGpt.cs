@@ -18,7 +18,9 @@ public class cshChatGpt : MonoBehaviour
             Debug.LogError("API KEY 설정이 안되어 있음, 설정해도 오류가 난다면 재부팅 해보길 바람");
             return;
         }
+        
         openAi = new OpenAIApi(apiKey);
+
         //CallGPT(prompt);
     }
     public OpenAIApi getOpenAiApi()
