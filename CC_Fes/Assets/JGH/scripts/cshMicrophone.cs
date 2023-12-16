@@ -29,10 +29,19 @@ public class cshMicrophone : MonoBehaviour
         {
             if(isMicOn == true)
             {
-                microphoneStop();
+                microphoneStop("baby");
                 isMicOn = false;
             }
             
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            if (isMicOn == true)
+            {
+                microphoneStop("adviser");
+                isMicOn = false;
+            }
+
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -58,7 +67,15 @@ public class cshMicrophone : MonoBehaviour
         {
             if (isMicOn == true)
             {
-                microphoneStop();
+                microphoneStop("baby");
+                isMicOn = false;
+            }
+        }
+        if (OVRInput.GetDown(OVRInput.Button.Three))
+        {
+            if (isMicOn == true)
+            {
+                microphoneStop("adviser");
                 isMicOn = false;
             }
         }
@@ -93,7 +110,7 @@ public class cshMicrophone : MonoBehaviour
         
     }
     // async : 비동기작업을 하는 키워드
-    public async void microphoneStop()
+    public async void microphoneStop(string who)
     {
         
         Debug.Log("Stop");
@@ -111,9 +128,8 @@ public class cshMicrophone : MonoBehaviour
         {
             openAi = this.GetComponent<cshChatGpt>().getOpenAiApi();
         }
-
         // await : 비동기 작업에서 작업이 완료될 때까지 대기 하도록 하는 키워드
         var res = await openAi.CreateAudioTranscription(req);
-        this.GetComponent<cshChatGpt>().CallGPT(res.Text);
+        this.GetComponent<cshChatGpt>().CallGPT(res.Text, who);
     }
 }

@@ -49,4 +49,9 @@ public class cshTTS : MonoBehaviour
         this.speed = speed;
         textToSpeech(text);
     }
+    public async void textToSpeech(string text, TTSVoice voice)
+    {
+        this.voice = voice;
+        textToSpeech(text);
+    }
 }

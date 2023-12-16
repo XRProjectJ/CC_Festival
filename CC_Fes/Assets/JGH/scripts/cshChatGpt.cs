@@ -33,7 +33,7 @@ public class cshChatGpt : MonoBehaviour
     {
         
     }
-    public async void CallGPT(string prompt)
+    public async void CallGPT(string prompt, string who)
     {
         var askMessage = new ChatMessage()
         {
@@ -49,7 +49,14 @@ public class cshChatGpt : MonoBehaviour
         });
         string response = completionResponse.Choices[0].Message.Content;
         Debug.Log(response);
-        this.GetComponent<cshTTS>().textToSpeech(response);
+        if (who.Equals("baby"))
+        {
+            this.GetComponent<cshTTS>().textToSpeech(response, TTSVoice.Nova);
+        }
+        else
+        {
+            this.GetComponent<cshTTS>().textToSpeech(response, TTSVoice.Shimmer);
+        }
     }
 
 }
