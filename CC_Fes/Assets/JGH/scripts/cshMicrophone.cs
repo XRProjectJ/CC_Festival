@@ -1,4 +1,5 @@
 using OpenAI;
+using OVR.OpenVR;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,8 @@ public class cshMicrophone : MonoBehaviour
     private string microphoneDevice = null;
     private readonly string fileName = "output.wav";
     private int frequency = 44100;
-    private OpenAIApi openAi;
+    private OpenAIApi baby;
+    private OpenAIApi adviser;
     private AudioClip audioClip;
     private string message;
     private bool isMicOn = false;
@@ -124,12 +126,26 @@ public class cshMicrophone : MonoBehaviour
             Model = "whisper-1",
             Language = "ko"
         };
-        if(openAi == null)
+        if(baby == null)
         {
-            openAi = this.GetComponent<cshChatGpt>().getOpenAiApi();
+            baby = this.GetComponent<cshChatGpt>().getBaby();
+        }
+        if (adviser == null)
+        {
+            adviser = this.GetComponent<cshChatGpt>().getAdviser();
         }
         // await : 비동기 작업에서 작업이 완료될 때까지 대기 하도록 하는 키워드
-        var res = await openAi.CreateAudioTranscription(req);
-        this.GetComponent<cshChatGpt>().CallGPT(res.Text, who);
+        if (who.Equals("baby"))
+        {
+            var res = await baby.CreateAudioTranscription(req);
+            this.GetComponent<cshChatGpt>().CallBaby(res.Text);
+        }
+        else
+        {
+            var res = await adviser.CreateAudioTranscription(req);
+            this.GetComponent<cshChatGpt>().CallAdviser(res.Text);
+        }
+       
+        
     }
 }
