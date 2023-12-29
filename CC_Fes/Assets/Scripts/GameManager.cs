@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject startSceneUIPanel; // 시작 화면 UI
     public GameObject spotUIPanel; // 장소선택 UI
     public GameObject textPanel; // 자막 패널
+    public GameObject MedPanel; //명상 패널
 
     public GameObject posLobby; // 로비 포지션
     public GameObject pos1; // 1번 포지션
@@ -28,6 +29,11 @@ public class GameManager : MonoBehaviour
 
     public Text mainText; // 메인 자막 text
     private string uiStr; // 자막에 들어갈 내용
+
+    public AudioSource Beach_BGM; // 바다 배경 음악
+    public AudioSource Mountain_BGM; // 산 배경 음악
+    private bool isMusicPlaying = false; // 음악 재생 여부
+
 
     public enum Mode1 { ModeSelect, PosSelect, Meditation, Consult };
     public enum Mode2 { Mountain, Beach };
@@ -301,14 +307,99 @@ public class GameManager : MonoBehaviour
 
         spotUIPanel.SetActive(true); // Situation의 UI 켜기
     }
+
+
     public void startMeditation()
     {
         GameManager.Instance.SetMode1(GameManager.Mode1.Meditation);
 
         spotUIPanel.SetActive(false);
+        MedPanel.SetActive(true); //명상 패널 키기
         Debug.Log("StartMed");
 
+        
+
+        if (GameManager.Instance.GetMode2() == Mode2.Beach)
+        {
+            Beach_BGM.gameObject.SetActive(true); // AudioSource를 활성화
+
+            if (Beach_BGM != null)
+            {
+                Beach_BGM.Play(); // 할당된 배경 음악 재생
+                isMusicPlaying = true; // 재생 상태 변경
+            }
+            else
+            {
+                Debug.LogWarning("Beach_BGM AudioSource not assigned!");
+            }
+        }
+
+        else if(GameManager.Instance.GetMode2() == Mode2.Mountain)
+        {
+            Mountain_BGM.gameObject.SetActive(true); // AudioSource를 활성화
+            if (Mountain_BGM != null)
+            {
+                Mountain_BGM.Play(); // 할당된 배경 음악 재생
+                isMusicPlaying = true; // 재생 상태 변경
+            }
+            else
+            {
+                Debug.LogWarning("Mountain_BGM AudioSource not assigned!");
+            }
+        }
     }
+
+
+
+    public void ToggleBackgroundMusic()
+    {
+        if (GameManager.Instance.GetMode2() == Mode2.Beach)
+        {
+            if (Beach_BGM != null)
+            {
+                if (isMusicPlaying)
+                {
+                    Beach_BGM.Pause(); // 음악 일시 정지
+                    isMusicPlaying = false; // 재생 상태 변경
+                }
+                else
+                {
+                    Beach_BGM.Play(); // 음악 재생
+                    isMusicPlaying = true; // 재생 상태 변경
+                }
+            }
+            else
+            {
+                Debug.LogWarning("BGM AudioSource not assigned!");
+            }
+        }
+
+        else if (GameManager.Instance.GetMode2() == Mode2.Mountain)
+        {
+
+
+            if (Mountain_BGM != null)
+            {
+                if (isMusicPlaying)
+                {
+                    Mountain_BGM.Pause(); // 음악 일시 정지
+                    isMusicPlaying = false; // 재생 상태 변경
+                }
+                else
+                {
+                    Mountain_BGM.Play(); // 음악 재생
+                    isMusicPlaying = true; // 재생 상태 변경
+                }
+            }
+            else
+            {
+                Debug.LogWarning("BGM AudioSource not assigned!");
+            }
+        }
+
+
+    }
+
 
 
 }
