@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-    public static GameManager Instance;
+
 
     public GameObject startSceneUIPanel; // 시작 화면 UI
     public GameObject spotUIPanel; // 장소선택 UI
@@ -29,11 +29,52 @@ public class GameManager : MonoBehaviour
     public Text mainText; // 메인 자막 text
     private string uiStr; // 자막에 들어갈 내용
 
-    public enum Mode1 { Nothing, Meditation, Consult };
-    public enum Mode2 { Nothing, Beach, Mountain };
+    public enum Mode1 { ModeSelect, PosSelect, Meditation, Consult };
+    public enum Mode2 { Mountain, Beach };
+    public enum Mode3 { PosLobby, Pos1, Pos2 };
 
-    public Mode1 mode1; // 현재 행동 모드 저장
-    public Mode2 mode2; //현재 장소 모드 저장
+    public Mode1 mode1; // 현재 행동 모드
+    public Mode2 mode2; //현재 장소 모드
+    public Mode3 mode3;
+
+    public void SetMode1(Mode1 mode)
+    {
+        mode1 = mode;
+        Debug.Log("SetMode1 To" + mode1);
+    }
+
+    public Mode1 GetMode1()
+    {
+        Debug.Log("GetMode1 " + mode1);
+        return mode1;
+    }
+
+    public void SetMode2(Mode2 mode)
+    {
+        mode2 = mode;
+        Debug.Log("SetMode2 To" + mode2);
+    }
+
+    public Mode2 GetMode2()
+    {
+        Debug.Log("GetMode2 " + mode2);
+        return mode2;
+    }
+
+    public void SetMode3(Mode3 mode)
+    {
+        mode3 = mode;
+        Debug.Log("SetMode3 To" + mode3);
+    }
+
+    public Mode3 GetMode3()
+    {
+        Debug.Log("GetMode3 " + mode3);
+        return mode3;
+    }
+
+
+    public static GameManager Instance;
 
     private void Awake()
     {
@@ -44,23 +85,62 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
+
 
     void Start()
     {
         //mode1 = Mode1.Nothing; // 시작은 아무런 모드가 아닌 상태
         //mode2 = Mode2.Nothing;
 
-        //SceneManager.LoadScene("mountain");
+        Scene currentScene = SceneManager.GetActiveScene();
 
-        player.transform.position = posLobby.transform.position;
-        player.transform.rotation = posLobby.transform.rotation;
+        switch (currentScene.name)
+        {
+            case "mountain":
+                GameManager.Instance.SetMode2(GameManager.Mode2.Mountain);
+                break;
+            case "beach":
+                Debug.Log("Scene Change?");
+                GameManager.Instance.SetMode2(GameManager.Mode2.Beach);
+                break;
+        }
 
-        startSceneUIPanel.SetActive(true);
-        spotUIPanel.SetActive(false);
-        textPanel.SetActive(false);
+        switch (GameManager.Instance.GetMode1())
+        {
+
+            case Mode1.ModeSelect:
+                modeSelectUI();
+                break;
+            case Mode1.PosSelect:
+                selectMeditation();
+                break;
+            case Mode1.Meditation:
+                selectedSituation();
+                break;
+            case Mode1.Consult:
+                selectedSituation();
+                break;
+        }
+
+        switch (GameManager.Instance.GetMode3())
+        {
+
+            case Mode3.PosLobby:
+                player.transform.position = posLobby.transform.position;
+                player.transform.rotation = posLobby.transform.rotation;
+                break;
+            case Mode3.Pos1:
+                player.transform.position = pos1.transform.position;
+                player.transform.rotation = pos1.transform.rotation;
+                break;
+            case Mode3.Pos2:
+                player.transform.position = pos2.transform.position;
+                player.transform.rotation = pos2.transform.rotation;
+                break;
+        }
 
         playerScript = player.GetComponent<Player>();
     }
@@ -68,27 +148,41 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+
 
     }
 
     public void sceneChange()
     {
-        switch (mode2)
+        switch (GameManager.Instance.GetMode2())
         {
             case Mode2.Mountain:
                 SceneManager.LoadScene("mountain");
-                mode1 = Mode1.Meditation;
+                //GameManager.Instance.SetMode1(GameManager.Mode1.PosSelect);
                 break;
             case Mode2.Beach:
                 SceneManager.LoadScene("beach");
-                mode1 = Mode1.Meditation;
+                //GameManager.Instance.SetMode1(GameManager.Mode1.PosSelect);
                 break;
         }
     }
 
 
-    public void selectSituation()
+
+    public void modeSelectUI()
+    {
+        GameManager.Instance.SetMode1(GameManager.Mode1.ModeSelect);
+        player.transform.position = posLobby.transform.position;
+        player.transform.rotation = posLobby.transform.rotation;
+
+        startSceneUIPanel.SetActive(true);
+        spotUIPanel.SetActive(false);
+        textPanel.SetActive(false);
+    }
+
+
+    // 명상 시작하기 / 상담 시작하기
+    public void selectedSituation()
     {
         startSceneUIPanel.SetActive(false); // 시작 화면 UI 끄기
         //startSceneCam.SetActive(false); // 시작 화면 카메라 끄기
@@ -99,36 +193,38 @@ public class GameManager : MonoBehaviour
     }
 
 
-    
+
     public void selectMeditation()
     {
-        mode1 = Mode1.Meditation;
+        GameManager.Instance.SetMode1(GameManager.Mode1.Meditation);
         textPanel.SetActive(true);
         //player.transform.position = beachSituation.transform.position;
-        selectSituation();
+        selectedSituation();
         Debug.Log("SelectMed");
-        
+
     }
 
     public void selectConsult()
     {
-        mode1 = Mode1.Consult;
+        GameManager.Instance.SetMode1(GameManager.Mode1.Consult);
         textPanel.SetActive(true);
         //player.transform.position = mountainSituation.transform.position;
-        selectSituation();
+        selectedSituation();
         Debug.Log("SelectCon");
     }
 
     // Moutain 씬 Pos1로 이동
     public void moveMPos1()
     {
-        
-        if(mode2 == Mode2.Beach)
+        GameManager.Instance.SetMode1(GameManager.Mode1.PosSelect);
+        GameManager.Instance.SetMode3(GameManager.Mode3.Pos1);
+
+        if (GameManager.Instance.GetMode2() == Mode2.Beach)
         {
-            mode2 = Mode2.Mountain;
+            GameManager.Instance.SetMode2(GameManager.Mode2.Mountain);
             sceneChange();
         }
-        
+
         startSceneUIPanel.SetActive(false); // 시작 화면 UI 끄기
         //startSceneCam.SetActive(false); // 시작 화면 카메라 끄기
         player.transform.position = pos1.transform.position;
@@ -142,9 +238,12 @@ public class GameManager : MonoBehaviour
     // Moutain 씬 Pos2로 이동
     public void moveMPos2()
     {
-        if (mode2 == Mode2.Beach)
+        GameManager.Instance.SetMode1(GameManager.Mode1.PosSelect);
+        GameManager.Instance.SetMode3(GameManager.Mode3.Pos2);
+
+        if (GameManager.Instance.GetMode2() == Mode2.Beach)
         {
-            mode2 = Mode2.Mountain;
+            GameManager.Instance.SetMode2(GameManager.Mode2.Mountain);
             sceneChange();
         }
 
@@ -159,18 +258,22 @@ public class GameManager : MonoBehaviour
     }
 
     // Beach 씬 Pos1로 이동
-    public void moveMPos3()
+    public void moveBPos3()
     {
-        if (mode2 == Mode2.Mountain)
+        GameManager.Instance.SetMode1(GameManager.Mode1.PosSelect);
+        GameManager.Instance.SetMode3(GameManager.Mode3.Pos1);
+
+        if (GameManager.Instance.GetMode2() == Mode2.Mountain)
         {
-            mode2 = Mode2.Beach;
+            GameManager.Instance.SetMode2(GameManager.Mode2.Beach);
+            Debug.Log("Pos: SetMode2 To" + GameManager.Instance.GetMode2());
             sceneChange();
         }
 
         startSceneUIPanel.SetActive(false); // 시작 화면 UI 끄기
         //startSceneCam.SetActive(false); // 시작 화면 카메라 끄기
-        player.transform.position = pos2.transform.position;
-        player.transform.rotation = pos2.transform.rotation;
+        player.transform.position = pos1.transform.position;
+        player.transform.rotation = pos1.transform.rotation;
         //player.SetActive(true); // 플레이어 활성화
         //playerCam.SetActive(true); // 플레이어 시점으로 전환
 
@@ -178,11 +281,14 @@ public class GameManager : MonoBehaviour
     }
 
     // Beach 씬 Pos2로 이동
-    public void moveMPos4()
+    public void moveBPos4()
     {
-        if (mode2 == Mode2.Mountain)
+        GameManager.Instance.SetMode1(GameManager.Mode1.PosSelect);
+        GameManager.Instance.SetMode3(GameManager.Mode3.Pos2);
+
+        if (GameManager.Instance.GetMode2() == Mode2.Mountain)
         {
-            mode2 = Mode2.Beach;
+            GameManager.Instance.SetMode2(GameManager.Mode2.Beach);
             sceneChange();
         }
 
@@ -197,6 +303,8 @@ public class GameManager : MonoBehaviour
     }
     public void startMeditation()
     {
+        GameManager.Instance.SetMode1(GameManager.Mode1.Meditation);
+
         spotUIPanel.SetActive(false);
         Debug.Log("StartMed");
 
