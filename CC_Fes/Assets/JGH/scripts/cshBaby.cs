@@ -14,6 +14,7 @@ public class cshBaby : cshChatClass
     {
         base.Start();
         chat = new OpenAIApi(apiKey);
+        gameManager = GameManager.Instance;
     }
 
     // Update is called once per frame
