@@ -417,17 +417,6 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void setUIMed()
-    {
-        
-        uiStr = "명상 시작~!";
-        setText(mainText, uiStr);
-
-    }
-
-
-
-
     //delay만큼 대기
     private IEnumerator Delayed(float delay, System.Action action)
     {
@@ -442,12 +431,272 @@ public class GameManager : MonoBehaviour
         text.text = str;
     }
 
+
+    private float time;
+
     public IEnumerator startMed()
     {
-        Debug.Log("Med Ready & Start");
+        Debug.Log("Med_ing");
         yield return new WaitForSeconds(2f); // 2초 대기 후 시작
 
-        setUIMed();
+        uiStr = "명상 시작~!";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(2f); // 명상 자세
+        uiStr = "몸에 무리가 가지 않는 자세로 비스듬히 눕거나 편하게 앉아주세요.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "양손으로 따뜻하게 배를 감싸고 명상을 시작합니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "코로 숨을 들이마쉬고";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "입으로 크게 내쉽니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "큰 호흡을 수차례 한 후";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "나의 원래 호흡으로 돌아옵니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "온몸 구석구석의 긴장을 풀고";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "편안함을 느끼기 시작합니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "호흡을 통해 고요함과 평온함을 얻습니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "나와 우리 아기는 절대적 사랑, 그 풍요로운 에너지와 연결되어 있습니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "잠시동안 우리를 둘러싼 그 사랑의 기운에 의식을 모읍니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "분홍빛과 하얀빛이 함께 어우러진 그 포근하고 예쁜 빛이";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "나의 아랫배, 우리 아기가 자리한 곳에서 빛을 내는 것을 떠올려 봅니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "이 기분 좋은 치유, 평온, 사랑의 에너지가";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "나와 아기를 세상 모든 것들로부터 지켜냅니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);//산일 때
+        if (GameManager.Instance.GetMode2() == Mode2.Mountain)
+        {
+            uiStr = "나는 지금 나무들이 곧고 아름답게 뻗어있는 푸른 숲을 바라보고 있습니다.";
+            setText(mainText, uiStr);
+
+            yield return new WaitForSeconds(5f);
+            uiStr = "예쁜 새들이 지저귀고,";
+            setText(mainText, uiStr);
+        }
+
+        else if (GameManager.Instance.GetMode2() == Mode2.Beach)//바다일 때
+        {
+            uiStr = "나는 지금 윤슬이 아름답게 빛나는 맑고 깨끗한 바다를 바라보고 있습니다.";
+            setText(mainText, uiStr);
+
+            yield return new WaitForSeconds(5f);
+            uiStr = "파도소리가 들려오고,";
+            setText(mainText, uiStr);
+        }
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "바람이 살랑입니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "이 모든 것들을 만끽하며 내 마음을 채웁니다.";
+        setText(mainText, uiStr);
+
+
+        yield return new WaitForSeconds(5f);//산일 때
+        if (GameManager.Instance.GetMode2() == Mode2.Mountain)
+        {
+            uiStr = "생명 그 자체를 듬뿍 머금은";
+            setText(mainText, uiStr);
+
+            yield return new WaitForSeconds(5f);
+            uiStr = "이 아름다운 숲을 잠시 고요한 마음으로 바라봅니다.";
+            setText(mainText, uiStr);
+        }
+
+        else if (GameManager.Instance.GetMode2() == Mode2.Beach)//바다일 때
+        {
+            uiStr = "생명 그 자체를 듬뿍 머금은";
+            setText(mainText, uiStr);
+
+            yield return new WaitForSeconds(5f);
+            uiStr = "이 아름다운 물을 잠시 고요한 마음으로 바라봅니다.";
+            setText(mainText, uiStr);
+        }
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "아무런 평가도 하지 않고";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "나는 그저 고요히 머무릅니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "어떤 잡념이 떠오르면";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "그 또한 평가하거나 거부하지 않고";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "잠시 그 존재, 그대로를 바라보고 인정해주고";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);//산일 때
+        if (GameManager.Instance.GetMode2() == Mode2.Mountain)
+        {
+            uiStr = "이 숲의 바람을 따라 저 먼 곳으로 흘려보냅니다.";
+            setText(mainText, uiStr);
+
+            yield return new WaitForSeconds(5f);
+            uiStr = "걱정과 근심은 살랑이는 바람을 타고";
+            setText(mainText, uiStr);
+
+            yield return new WaitForSeconds(5f);
+            uiStr = "천천히 저 멀리 수평선 너머로 사라져 갑니다.";
+            setText(mainText, uiStr);
+
+            yield return new WaitForSeconds(5f);
+            uiStr = "우리 아기는 지금 내가 마주한 이 평온한 숲과 같이";
+            setText(mainText, uiStr);
+        }
+
+        else if (GameManager.Instance.GetMode2() == Mode2.Beach)//바다일 때
+        {
+            uiStr = "이 바다의 물을 따라 저 먼 곳으로 흘려보냅니다.";
+            setText(mainText, uiStr);
+
+            yield return new WaitForSeconds(5f);
+            uiStr = "걱정과 근심은 반짝이는 물살을 타고";
+            setText(mainText, uiStr);
+
+            yield return new WaitForSeconds(5f);
+            uiStr = "천천히 저 멀리 수평선 너머로 사라져 갑니다.";
+            setText(mainText, uiStr);
+
+            yield return new WaitForSeconds(5f);
+            uiStr = "우리 아기는 지금 내가 마주한 이 평온한 바다와 같이";
+            setText(mainText, uiStr);
+        }
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "세상 가장 안락하고 편안한 양수 안에서";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "가장 기분 좋은 엄마의 냄새를 맡고";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "가장 듣기 좋은 소리, 엄마의 심장 소리를 들으며";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "아름다운 삶을 준비하고 있습니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "나와 마찬가지로 하나의 영혼인 우리 아기는";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "나의 사랑을 느끼고";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "나와의 연결을 느끼고";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "내가 보내는 사랑과 같은";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = " 무한한 사랑을 언제나 내게 보내고 있습니다.";
+        setText(mainText, uiStr);
+
+
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "아기가 내게 전달하는 사랑의 에너지를 느껴봅니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "나와 우리 아기는 안전합니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "평온합니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "나는 평온하고 안락한 출산을 할 것이며";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "아기는 건강히 무사히 나의 품에 안겨 이 세상을 맞이할 것입니다.";
+        setText(mainText, uiStr);
+
+
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "불안이나 걱정을 만들어내는 많은 것들이";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "내 마음에 요동을 일으키지않도록";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "아기와 나를 연결하고 있는 강인한 에너지의 고리,";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "우리 안에서 빛나는 곱고 예쁜 생명의 빛.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "이 모든 것들이 언제나 함께 합니다.";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "나와 아기를 지켜주는 이 든든한 기운에 감사한 마음을 가지고";
+        setText(mainText, uiStr);
+
+        yield return new WaitForSeconds(5f);
+        uiStr = "천천히 눈을 뜹니다.";
+        setText(mainText, uiStr);
 
 
         yield return null;
