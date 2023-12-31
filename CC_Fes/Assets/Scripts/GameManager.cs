@@ -12,8 +12,13 @@ public class GameManager : MonoBehaviour
 
     public GameObject startSceneUIPanel; // 시작 화면 UI
     public GameObject spotUIPanel; // 장소선택 UI
-    public GameObject textPanel; // 자막 패널
+    public GameObject textPanel; // 명상 자막 패널
     public GameObject MedPanel; //명상 패널
+    public GameObject ConPanel; //상담 패널
+    public GameObject talkMainPanel; //상담 패널
+    public GameObject talkingtextPanel; // 상담 자막 패널
+
+
 
     public GameObject posLobby; // 로비 포지션
     public GameObject pos1; // 1번 포지션
@@ -29,6 +34,9 @@ public class GameManager : MonoBehaviour
 
     public Text mainText; // 메인 자막 text
     private string uiStr; // 자막에 들어갈 내용
+
+    public Text talkingText; //대화 text
+    public string talkingStr; //대화 자막에 들어갈 내용
 
     public AudioSource Beach_BGM; // 바다 배경 음악
     public AudioSource Mountain_BGM; // 산 배경 음악
@@ -184,6 +192,7 @@ public class GameManager : MonoBehaviour
         startSceneUIPanel.SetActive(true);
         spotUIPanel.SetActive(false);
         textPanel.SetActive(false);
+        ConPanel.SetActive(false);
     }
 
 
@@ -195,7 +204,16 @@ public class GameManager : MonoBehaviour
         //player.SetActive(true); // 플레이어 활성화
         //playerCam.SetActive(true); // 플레이어 시점으로 전환
 
-        spotUIPanel.SetActive(true); // Situation의 UI 켜기
+        if (GameManager.Instance.GetMode1() == Mode1.Meditation)
+        {
+            spotUIPanel.SetActive(true); // Situation의 UI 켜기
+        }
+        
+        else if (GameManager.Instance.GetMode1() == Mode1.Consult)
+        {
+            ConPanel.SetActive(true); // Situation의 UI 켜기
+        }
+        
     }
 
 
@@ -213,11 +231,26 @@ public class GameManager : MonoBehaviour
     public void selectConsult()
     {
         GameManager.Instance.SetMode1(GameManager.Mode1.Consult);
-        textPanel.SetActive(true);
         //player.transform.position = mountainSituation.transform.position;
         selectedSituation();
         Debug.Log("SelectCon");
     }
+
+
+    public void talkingWithBaby()
+    {
+        ConPanel.SetActive(false);
+        talkMainPanel.SetActive(true);
+        Debug.Log("TalkingWithBaby");
+    }
+
+    public void talkingWithPro()
+    {
+        ConPanel.SetActive(false);
+        talkMainPanel.SetActive(true);
+        Debug.Log("TalkingWithPro");
+    }
+
 
     // Moutain 씬 Pos1로 이동
     public void moveMPos1()
