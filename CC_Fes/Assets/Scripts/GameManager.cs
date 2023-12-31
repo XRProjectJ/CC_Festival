@@ -327,6 +327,7 @@ public class GameManager : MonoBehaviour
             {
                 Beach_BGM.Play(); // 할당된 배경 음악 재생
                 isMusicPlaying = true; // 재생 상태 변경
+                Debug.Log("MusicPlay");
             }
             else
             {
@@ -341,6 +342,7 @@ public class GameManager : MonoBehaviour
             {
                 Mountain_BGM.Play(); // 할당된 배경 음악 재생
                 isMusicPlaying = true; // 재생 상태 변경
+                Debug.Log("MusicPlay");
             }
             else
             {
@@ -361,11 +363,13 @@ public class GameManager : MonoBehaviour
                 {
                     Beach_BGM.Pause(); // 음악 일시 정지
                     isMusicPlaying = false; // 재생 상태 변경
+                    Debug.Log("MusicStop");
                 }
                 else
                 {
                     Beach_BGM.Play(); // 음악 재생
                     isMusicPlaying = true; // 재생 상태 변경
+                    Debug.Log("MusicPlay");
                 }
             }
             else
@@ -384,11 +388,13 @@ public class GameManager : MonoBehaviour
                 {
                     Mountain_BGM.Pause(); // 음악 일시 정지
                     isMusicPlaying = false; // 재생 상태 변경
+                    Debug.Log("MusicStop");
                 }
                 else
                 {
                     Mountain_BGM.Play(); // 음악 재생
                     isMusicPlaying = true; // 재생 상태 변경
+                    Debug.Log("MusicPlay");
                 }
             }
             else
