@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerCam; // 플레이어 시점의 카메라
     public GameObject player; // 플레이어 객체
     private Player playerScript; // 플레이어 스크립트
+    
 
     public Text mainText; // 메인 자막 text
     private string uiStr; // 자막에 들어갈 내용
@@ -49,11 +50,14 @@ public class GameManager : MonoBehaviour
     public enum Mode1 { ModeSelect, PosSelect, Meditation, Consult };
     public enum Mode2 { Mountain, Beach };
     public enum Mode3 { PosLobby, Pos1, Pos2 };
+    public enum Mode4 { Baby, Consult};
 
     public Mode1 mode1; // 현재 행동 모드
     public Mode2 mode2; //현재 장소 모드
     public Mode3 mode3;
+    public Mode4 mode4; //누구와 대화 모드
 
+    public static GameManager Instance;
     public void SetMode1(Mode1 mode)
     {
         mode1 = mode;
@@ -90,8 +94,25 @@ public class GameManager : MonoBehaviour
         return mode3;
     }
 
+    public void SetMode4_Baby()
+    {
+        mode4 = GameManager.Mode4.Baby;
+        Debug.Log("SetMod4 To" + mode4);
+    }
 
-    public static GameManager Instance;
+    public void SetMode4_Con()
+    {
+        mode4 = GameManager.Mode4.Consult;
+        Debug.Log("SetMod4 To" + mode4);
+    }
+
+    public Mode4 GetMode4()
+    {
+        Debug.Log("GetMode4 " + mode4);
+        return mode4;
+    }
+
+    
 
     private void Awake()
     {
@@ -160,6 +181,8 @@ public class GameManager : MonoBehaviour
         }
 
         playerScript = player.GetComponent<Player>();
+
+
     }
 
 
@@ -261,7 +284,6 @@ public class GameManager : MonoBehaviour
         setText(talkingText_User, Str_User);
         setText(talkingText_Other, Str_Other);
     }
-
 
     // Moutain 씬 Pos1로 이동
     public void moveMPos1()

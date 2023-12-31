@@ -96,4 +96,28 @@ public class cshMicController : MonoBehaviour
             }
         }
     }
+
+
+
+
+    public void askBaby()
+    {
+        if (isMicOn == false && babyMic.checkMicrophoneDevice())
+        {
+            Debug.Log("富窍技夸(baby)");
+            babyMic.microphoneStart();
+            isMicOn = true;
+        }
+    }
+
+    public void askAdviser()
+    {
+        if (isMicOn == false && adviserMic.checkMicrophoneDevice())
+        {
+            Debug.Log("富窍技夸(adviser)");
+            adviserMic.microphoneStart();
+            isMicOn = true;
+        }
+    }
+
 }
