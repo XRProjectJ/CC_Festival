@@ -148,4 +148,25 @@ public class cshMicrophone : MonoBehaviour
        
         
     }
+
+
+    public void askBaby()
+    {
+        if (isMicOn == false)
+            {
+                Debug.Log("富窍技夸");
+                microphoneStart();
+                isMicOn = true;
+        }
+    }
+
+    public void askAdviser()
+    {
+        if (isMicOn == false)
+        {
+            Debug.Log("富窍技夸");
+            microphoneStart();
+            isMicOn = true;
+        }
+    }
 }
