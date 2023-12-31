@@ -317,8 +317,8 @@ public class GameManager : MonoBehaviour
         MedPanel.SetActive(true); //명상 패널 키기
         Debug.Log("StartMed");
 
-        
 
+        //배경음악재생
         if (GameManager.Instance.GetMode2() == Mode2.Beach)
         {
             Beach_BGM.gameObject.SetActive(true); // AudioSource를 활성화
@@ -335,7 +335,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        else if(GameManager.Instance.GetMode2() == Mode2.Mountain)
+        else if (GameManager.Instance.GetMode2() == Mode2.Mountain)
         {
             Mountain_BGM.gameObject.SetActive(true); // AudioSource를 활성화
             if (Mountain_BGM != null)
@@ -349,6 +349,18 @@ public class GameManager : MonoBehaviour
                 Debug.LogWarning("Mountain_BGM AudioSource not assigned!");
             }
         }
+
+
+        //명상 진행
+        StartCoroutine("startMed");
+
+
+
+
+
+
+
+
     }
 
 
@@ -380,8 +392,6 @@ public class GameManager : MonoBehaviour
 
         else if (GameManager.Instance.GetMode2() == Mode2.Mountain)
         {
-
-
             if (Mountain_BGM != null)
             {
                 if (isMusicPlaying)
@@ -402,10 +412,45 @@ public class GameManager : MonoBehaviour
                 Debug.LogWarning("BGM AudioSource not assigned!");
             }
         }
+    }
 
+
+
+
+    public void setUIMed()
+    {
+        
+        uiStr = "명상 시작~!";
+        setText(mainText, uiStr);
 
     }
 
 
 
+
+    //delay만큼 대기
+    private IEnumerator Delayed(float delay, System.Action action)
+    {
+        yield return new WaitForSeconds(delay);
+        action?.Invoke();
+    }
+
+
+    //text 내용 설정
+    private void setText(Text text, string str)
+    {
+        text.text = str;
+    }
+
+    public IEnumerator startMed()
+    {
+        Debug.Log("Med Ready & Start");
+        yield return new WaitForSeconds(2f); // 2초 대기 후 시작
+
+        setUIMed();
+
+
+        yield return null;
+        yield break;
+    }
 }
