@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
     public GameObject MedPanel; //명상 패널
     public GameObject ConPanel; //상담 패널
     public GameObject talkMainPanel; //상담 패널
-    public GameObject talkingtextPanel; // 상담 자막 패널
+    public GameObject talking_User; // 상담 자막 패널
+    public GameObject talking_Other; // 상담 자막 패널
 
 
 
@@ -35,8 +36,10 @@ public class GameManager : MonoBehaviour
     public Text mainText; // 메인 자막 text
     private string uiStr; // 자막에 들어갈 내용
 
-    public Text talkingText; //대화 text
-    public string talkingStr; //대화 자막에 들어갈 내용
+    public Text talkingText_User; //대화 text
+    public string Str_User; //대화 자막에 들어갈 내용
+    public Text talkingText_Other; //대화 text
+    public string Str_Other; //대화 자막에 들어갈 내용
 
     public AudioSource Beach_BGM; // 바다 배경 음악
     public AudioSource Mountain_BGM; // 산 배경 음악
@@ -242,6 +245,10 @@ public class GameManager : MonoBehaviour
         ConPanel.SetActive(false);
         talkMainPanel.SetActive(true);
         Debug.Log("TalkingWithBaby");
+        Str_Other = "아기랑 대화해요~";
+        Str_User = "말을 걸어보세요";
+        setText(talkingText_User, Str_User);
+        setText(talkingText_Other, Str_Other);
     }
 
     public void talkingWithPro()
@@ -249,6 +256,10 @@ public class GameManager : MonoBehaviour
         ConPanel.SetActive(false);
         talkMainPanel.SetActive(true);
         Debug.Log("TalkingWithPro");
+        Str_Other = "상담사랑 대화해요~";
+        Str_User = "말을 걸어보세요";
+        setText(talkingText_User, Str_User);
+        setText(talkingText_Other, Str_Other);
     }
 
 
@@ -387,13 +398,6 @@ public class GameManager : MonoBehaviour
         //명상 진행
         StartCoroutine("startMed");
 
-
-
-
-
-
-
-
     }
 
 
@@ -459,7 +463,7 @@ public class GameManager : MonoBehaviour
 
 
     //text 내용 설정
-    private void setText(Text text, string str)
+    public void setText(Text text, string str)
     {
         text.text = str;
     }
@@ -467,7 +471,7 @@ public class GameManager : MonoBehaviour
 
     private float time;
 
-    public IEnumerator startMed()
+        public IEnumerator startMed()
     {
         Debug.Log("Med_ing");
         yield return new WaitForSeconds(2f); // 2초 대기 후 시작

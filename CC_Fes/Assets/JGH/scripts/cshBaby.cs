@@ -7,6 +7,7 @@ using OVR.OpenVR;
 
 public class cshBaby : cshChatClass
 {
+    private GameManager gameManager; // GameManager 스크립트에 접근하기 위한 변수
     private OpenAIApi chat;
     // Start is called before the first frame update
     override public void Start()
@@ -29,6 +30,7 @@ public class cshBaby : cshChatClass
         };
 
         Debug.Log(prompt);
+
         var fine_tuning = new ChatMessage()
         {
             Role = "system",
@@ -36,6 +38,19 @@ public class cshBaby : cshChatClass
         };
         messages.Add(fine_tuning);
         messages.Add(askMessage);
+
+
+        // 일정 길이 이상이면 \n을 추가
+        int maxLineLength_User = 70;
+        if (prompt.Length > maxLineLength_User)
+        {
+            prompt = InsertNewLines(prompt, maxLineLength_User);
+        }
+        gameManager.Str_User = prompt;
+        gameManager.setText(gameManager.talkingText_User, gameManager.Str_User);
+
+
+
         var emotionResponse = await openAI.CreateChatCompletion(new CreateChatCompletionRequest()
         {
             Model = "ft:gpt-3.5-turbo-1106:personal::8WcnPr5H",
@@ -50,6 +65,27 @@ public class cshBaby : cshChatClass
         Debug.Log(emotion);
         string response = completionResponse.Choices[0].Message.Content;
         Debug.Log(response);
+
+        int maxLineLength_Other = 40;
+        if (response.Length > maxLineLength_Other)
+        {
+            response = InsertNewLines(response, maxLineLength_Other);
+        }
+        gameManager.Str_Other = response;
+        gameManager.setText(gameManager.talkingText_Other, gameManager.Str_Other);
+
         this.GetComponent<cshTTS>().textToSpeech(response, TTSVoice.Nova);
+    }
+
+    string InsertNewLines(string text, int maxLineLength)
+    {
+        // 특정 길이마다 \n을 삽입하여 줄 바꿈
+        string result = "";
+        for (int i = 0; i < text.Length; i += maxLineLength)
+        {
+            int length = Mathf.Min(maxLineLength, text.Length - i);
+            result += text.Substring(i, length) + "\n";
+        }
+        return result;
     }
 }
