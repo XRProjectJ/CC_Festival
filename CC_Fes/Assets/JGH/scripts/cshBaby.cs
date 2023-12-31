@@ -9,6 +9,7 @@ public class cshBaby : cshChatClass
 {
     private GameManager gameManager; // GameManager 스크립트에 접근하기 위한 변수
     private OpenAIApi chat;
+    public ParticleSystem heartMaker;
     // Start is called before the first frame update
     override public void Start()
     {
@@ -57,14 +58,13 @@ public class cshBaby : cshChatClass
             Model = "ft:gpt-3.5-turbo-1106:personal::8WcnPr5H",
             Messages = messages
         });
-        var completionResponse = await chat.CreateChatCompletion(new CreateChatCompletionRequest()
-        {
-            Model = "gpt-3.5-turbo-0613",
-            Messages = messages
-        });
-        string emotion = emotionResponse.Choices[0].Message.Content;
-        Debug.Log(emotion);
-        string response = completionResponse.Choices[0].Message.Content;
+        /* var completionResponse = await chat.CreateChatCompletion(new CreateChatCompletionRequest()
+         {
+             Model = "gpt-3.5-turbo-0613",
+             Messages = messages
+         });*/
+
+        /*string response = completionResponse.Choices[0].Message.Content;
         Debug.Log(response);
 
         int maxLineLength_Other = 40;
@@ -75,9 +75,15 @@ public class cshBaby : cshChatClass
         gameManager.Str_Other = response;
         gameManager.setText(gameManager.talkingText_Other, gameManager.Str_Other);
 
-        this.GetComponent<cshTTS>().textToSpeech(response, TTSVoice.Nova);
+        this.GetComponent<cshTTS>().textToSpeech(response, TTSVoice.Nova);*/
+        string emotion = emotionResponse.Choices[0].Message.Content;
+        Debug.Log(emotion);
+        if(emotion == "positive")
+        {
+            heartMaker.Play();
+        }
+        
     }
-
     string InsertNewLines(string text, int maxLineLength)
     {
         // 특정 길이마다 \n을 삽입하여 줄 바꿈
