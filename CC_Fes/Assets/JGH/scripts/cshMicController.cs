@@ -119,5 +119,23 @@ public class cshMicController : MonoBehaviour
             isMicOn = true;
         }
     }
+    
 
+    public void answerBaby()
+    {
+        if (isMicOn)
+        {
+            babyMic.microphoneStop();
+            isMicOn = false;
+        }
+    }
+
+    public void answerAdviser()
+    {
+        if (isMicOn == true)
+        {
+            adviserMic.microphoneStop();
+            isMicOn = false;
+        }
+    }
 }

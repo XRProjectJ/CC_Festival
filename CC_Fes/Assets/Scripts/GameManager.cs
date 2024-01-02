@@ -19,6 +19,11 @@ public class GameManager : MonoBehaviour
     public GameObject talking_User; // 상담 자막 패널
     public GameObject talking_Other; // 상담 자막 패널
 
+    public GameObject askButton_Baby;//아기에게 질문
+    public GameObject askButton_Adviser;//상담사에게 질문
+    public GameObject answerButton_Baby;//아기 답변듣기
+    public GameObject answerButton_Adviser;//상담사 답변듣기
+
 
 
     public GameObject posLobby; // 로비 포지션
@@ -267,6 +272,12 @@ public class GameManager : MonoBehaviour
     {
         ConPanel.SetActive(false);
         talkMainPanel.SetActive(true);
+
+        askButton_Baby.SetActive(true);
+        askButton_Adviser.SetActive(false);
+        answerButton_Baby.SetActive(true);
+        answerButton_Adviser.SetActive(false);
+
         Debug.Log("TalkingWithBaby");
         Str_Other = "아기랑 대화해요~";
         Str_User = "말을 걸어보세요";
@@ -278,6 +289,12 @@ public class GameManager : MonoBehaviour
     {
         ConPanel.SetActive(false);
         talkMainPanel.SetActive(true);
+
+        askButton_Baby.SetActive(false);
+        askButton_Adviser.SetActive(true);
+        answerButton_Baby.SetActive(false);
+        answerButton_Adviser.SetActive(true);
+
         Debug.Log("TalkingWithPro");
         Str_Other = "상담사랑 대화해요~";
         Str_User = "말을 걸어보세요";
