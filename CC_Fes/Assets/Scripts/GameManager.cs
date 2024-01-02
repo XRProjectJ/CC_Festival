@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
 
     public AudioSource Beach_BGM; // 바다 배경 음악
     public AudioSource Mountain_BGM; // 산 배경 음악
+    public AudioSource Beach_Med; //바다 명상
+    public AudioSource Mountain_Med; //산 명상
     private bool isMusicPlaying = false; // 음악 재생 여부
 
 
@@ -186,7 +188,6 @@ public class GameManager : MonoBehaviour
         }
 
         playerScript = player.GetComponent<Player>();
-
 
     }
 
@@ -405,6 +406,7 @@ public class GameManager : MonoBehaviour
         if (GameManager.Instance.GetMode2() == Mode2.Beach)
         {
             Beach_BGM.gameObject.SetActive(true); // AudioSource를 활성화
+            Beach_Med.gameObject.SetActive(true); //명상 음원 활성화
 
             if (Beach_BGM != null)
             {
@@ -421,6 +423,7 @@ public class GameManager : MonoBehaviour
         else if (GameManager.Instance.GetMode2() == Mode2.Mountain)
         {
             Mountain_BGM.gameObject.SetActive(true); // AudioSource를 활성화
+            Mountain_Med.gameObject.SetActive(true); //명상 음원 활성화
             if (Mountain_BGM != null)
             {
                 Mountain_BGM.Play(); // 할당된 배경 음악 재생
@@ -719,10 +722,8 @@ public class GameManager : MonoBehaviour
         setText(mainText, uiStr);
 
         yield return new WaitForSeconds(5f);
-        uiStr = " 무한한 사랑을 언제나 내게 보내고 있습니다.";
+        uiStr = "무한한 사랑을 언제나 내게 보내고 있습니다.";
         setText(mainText, uiStr);
-
-
 
         yield return new WaitForSeconds(5f);
         uiStr = "아기가 내게 전달하는 사랑의 에너지를 느껴봅니다.";
@@ -743,8 +744,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
         uiStr = "아기는 건강히 무사히 나의 품에 안겨 이 세상을 맞이할 것입니다.";
         setText(mainText, uiStr);
-
-
 
         yield return new WaitForSeconds(5f);
         uiStr = "불안이나 걱정을 만들어내는 많은 것들이";
