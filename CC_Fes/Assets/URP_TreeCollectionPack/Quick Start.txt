@@ -1,0 +1,3 @@
+Uploaded from Unity 2020.3.24 at December 2021
+Note: This is the 3d model version of the Tree Collection Pack asset.
+The original version has been made using Unity Tree Creator that is not compatible with the URP
