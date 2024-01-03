@@ -132,10 +132,9 @@ public class cshMicController : MonoBehaviour
 
     public void answerAdviser()
     {
-        if (isMicOn == true)
-        {
+
             adviserMic.microphoneStop();
             isMicOn = false;
-        }
+
     }
 }
