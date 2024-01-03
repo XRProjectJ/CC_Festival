@@ -6,6 +6,7 @@ using UnityEngine;
 
 /// <summary>
 /// 아기 모델에 이 스크립트를 넣고 해당 모델안에 cshChatGpt 스크립트가 들어가야 함
+/// 현재는 안쓰이는 스크립트 입니다.
 /// </summary>
 public class cshMicrophone : MonoBehaviour
 {
