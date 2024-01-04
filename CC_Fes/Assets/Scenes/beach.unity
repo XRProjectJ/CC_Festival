@@ -1016,7 +1016,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 886739283207209013, guid: d0f82f30d5354f440a6862b6d6cf4839, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 451869211}
   m_SourcePrefab: {fileID: 100100000, guid: d0f82f30d5354f440a6862b6d6cf4839, type: 3}
 --- !u!1001 &347264251
 PrefabInstance:
@@ -1346,6 +1349,34 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 280eabf4e41dcff40ab53f381fa1cfd5, type: 3}
+--- !u!1 &451869205 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 886739283207209013, guid: d0f82f30d5354f440a6862b6d6cf4839, type: 3}
+  m_PrefabInstance: {fileID: 213817931}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &451869206 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6048598858039762189, guid: d0f82f30d5354f440a6862b6d6cf4839, type: 3}
+  m_PrefabInstance: {fileID: 213817931}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451869205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bc430ba97efb05428d1f1b89110714a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &451869211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 451869205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4fd1d0ad20de34f867d0a8bee3f019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &453668891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1437,7 +1468,6 @@ GameObject:
   - component: {fileID: 455287369}
   - component: {fileID: 455287368}
   - component: {fileID: 455287367}
-  - component: {fileID: 455287366}
   m_Layer: 5
   m_Name: Ask Button_A
   m_TagString: Untagged
@@ -1465,20 +1495,6 @@ RectTransform:
   m_AnchoredPosition: {x: 300, y: -50}
   m_SizeDelta: {x: 110, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &455287366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 455287364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc430ba97efb05428d1f1b89110714a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baby: {fileID: 569751888}
-  adviser: {fileID: 677772324}
 --- !u!114 &455287367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1561,7 +1577,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 455287366}
+      - m_Target: {fileID: 451869206}
         m_TargetAssemblyTypeName: cshMicController, Assembly-CSharp
         m_MethodName: askAdviser
         m_Mode: 1
@@ -2252,8 +2268,6 @@ GameObject:
   - component: {fileID: 678877019}
   - component: {fileID: 678877018}
   - component: {fileID: 678877017}
-  - component: {fileID: 678877020}
-  - component: {fileID: 678877021}
   m_Layer: 5
   m_Name: Answer Button_A
   m_TagString: Untagged
@@ -2363,7 +2377,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 678877020}
+      - m_Target: {fileID: 451869206}
         m_TargetAssemblyTypeName: cshMicController, Assembly-CSharp
         m_MethodName: answerAdviser
         m_Mode: 1
@@ -2375,32 +2389,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &678877020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678877015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc430ba97efb05428d1f1b89110714a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baby: {fileID: 569751888}
-  adviser: {fileID: 677772324}
---- !u!114 &678877021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 678877015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a20fe6929a6f06d439670e5eaccf70a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &716415063
 GameObject:
   m_ObjectHideFlags: 0
@@ -2492,7 +2480,6 @@ GameObject:
   - component: {fileID: 726503558}
   - component: {fileID: 726503557}
   - component: {fileID: 726503556}
-  - component: {fileID: 726503559}
   m_Layer: 5
   m_Name: Ask Button_B
   m_TagString: Untagged
@@ -2602,7 +2589,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 726503559}
+      - m_Target: {fileID: 451869206}
         m_TargetAssemblyTypeName: cshMicController, Assembly-CSharp
         m_MethodName: askBaby
         m_Mode: 1
@@ -2614,20 +2601,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &726503559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 726503554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc430ba97efb05428d1f1b89110714a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baby: {fileID: 569751888}
-  adviser: {fileID: 677772324}
 --- !u!1 &803603514
 GameObject:
   m_ObjectHideFlags: 0
@@ -4090,8 +4063,6 @@ GameObject:
   - component: {fileID: 1215744286}
   - component: {fileID: 1215744285}
   - component: {fileID: 1215744284}
-  - component: {fileID: 1215744287}
-  - component: {fileID: 1215744288}
   m_Layer: 5
   m_Name: Answer Button_B
   m_TagString: Untagged
@@ -4201,7 +4172,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1215744287}
+      - m_Target: {fileID: 451869206}
         m_TargetAssemblyTypeName: cshMicController, Assembly-CSharp
         m_MethodName: answerBaby
         m_Mode: 1
@@ -4213,33 +4184,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1215744287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1215744282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc430ba97efb05428d1f1b89110714a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baby: {fileID: 569751888}
-  adviser: {fileID: 677772324}
---- !u!114 &1215744288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1215744282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ff8977f2487bfc4ab48b18f17aa7bd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  heartMaker: {fileID: 0}
 --- !u!1 &1282411770
 GameObject:
   m_ObjectHideFlags: 0
