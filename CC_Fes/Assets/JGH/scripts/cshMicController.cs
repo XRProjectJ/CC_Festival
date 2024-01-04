@@ -123,18 +123,13 @@ public class cshMicController : MonoBehaviour
 
     public void answerBaby()
     {
-        if (isMicOn)
-        {
             babyMic.microphoneStop();
             isMicOn = false;
-        }
     }
 
     public void answerAdviser()
     {
-
             adviserMic.microphoneStop();
             isMicOn = false;
-
     }
 }
