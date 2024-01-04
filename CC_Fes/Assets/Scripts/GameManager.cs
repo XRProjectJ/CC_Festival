@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public GameObject answerButton_Baby;//아기 답변듣기
     public GameObject answerButton_Adviser;//상담사 답변듣기
 
+    public GameObject warningText;//시간경과 경고창
 
 
     public GameObject posLobby; // 로비 포지션
