@@ -270,6 +270,29 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void ShowWarningTextForDuration(float duration, string msg)
+    {
+        if (warningText != null)
+        {
+            warningText.GetComponent<Text>().text = msg; // warningText에 메시지 설정
+            warningText.SetActive(true);
+
+            // 특정 duration 동안 warningText를 활성화한 후 비활성화합니다.
+            StartCoroutine(HideWarningAfterDuration(duration));
+        }
+    }
+
+    private IEnumerator HideWarningAfterDuration(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        if (warningText != null)
+        {
+            warningText.SetActive(false);
+        }
+    }
+
+
+
     public void talkingWithBaby()
     {
         ConPanel.SetActive(false);

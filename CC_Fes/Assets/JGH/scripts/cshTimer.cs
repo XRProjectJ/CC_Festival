@@ -16,7 +16,7 @@ public class cshTimer : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        if(time >= 300.0f)
+        if(time >= 300.0f)//5분 경과마다 경고알림
         {
             time = 0.0f;
             count++;
@@ -28,5 +28,8 @@ public class cshTimer : MonoBehaviour
         int useTime = count * 5;
         string message = "사용하신지 " + useTime.ToString() + "분이 지났습니다.\n어지럽거나 속이 좋지 않으시다면 기기를 벗고 휴식을 취해주시길 바랍니다.";
         Debug.Log(message);
+
+        // GameManager의 ShowWarningTextForDuration 함수 호출
+        GameManager.Instance.ShowWarningTextForDuration(10f, message);
     }
 }
