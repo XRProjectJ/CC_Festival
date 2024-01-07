@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public GameObject askButton_Adviser;//상담사에게 질문
     public GameObject answerButton_Baby;//아기 답변듣기
     public GameObject answerButton_Adviser;//상담사 답변듣기
+    public GameObject babyPanel_Con;//아기 모델 패널
+    public GameObject AdviserPanel_Con;//상담사 모델 패널
 
     public GameObject warningText;//시간경과 경고창
 
@@ -302,6 +304,8 @@ public class GameManager : MonoBehaviour
         askButton_Adviser.SetActive(false);
         answerButton_Baby.SetActive(true);
         answerButton_Adviser.SetActive(false);
+        babyPanel_Con.SetActive(true);
+        AdviserPanel_Con.SetActive(false);
 
         Debug.Log("TalkingWithBaby");
         Str_Other = "아기랑 대화해요~";
@@ -319,6 +323,8 @@ public class GameManager : MonoBehaviour
         askButton_Adviser.SetActive(true);
         answerButton_Baby.SetActive(false);
         answerButton_Adviser.SetActive(true);
+        babyPanel_Con.SetActive(false);
+        AdviserPanel_Con.SetActive(true);
 
         Debug.Log("TalkingWithPro");
         Str_Other = "상담사랑 대화해요~";
@@ -542,8 +548,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("Med_ing");
         yield return new WaitForSeconds(2f); // 2초 대기 후 시작
 
-        uiStr = "명상 시작~!";
-        setText(mainText, uiStr);
 
         yield return new WaitForSeconds(2f); // 명상 자세
         uiStr = "몸에 무리가 가지 않는 자세로 비스듬히 눕거나 편하게 앉아주세요.";
