@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     private bool isMusicPlaying = false; // 음악 재생 여부
 
 
-    public enum Mode1 { ModeSelect, PosSelect, Meditation, Consult };
+    public enum Mode1 { ModeSelect, MeditationSelected, ConsultSelected, PosSelect, Meditation, Consult };
     public enum Mode2 { Mountain, Beach };
     public enum Mode3 { PosLobby, Pos1, Pos2 };
     public enum Mode4 { Baby, Consult};
@@ -216,10 +216,56 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // 모든 패널 끄기
+    public void disableAllPanels()
+    {
+        
+        startSceneUIPanel.SetActive(false);
+        spotUIPanel.SetActive(false);
+        //textPanel.SetActive(false);
+        ConPanel.SetActive(false);
+
+        MedPanel.SetActive(false);
+
+        talkMainPanel.SetActive(false);
+
+    }
+
+    public void goBack()
+    {
+        disableAllPanels();
+
+        switch(GameManager.Instance.GetMode1())
+        {
+            case Mode1.MeditationSelected:
+                modeSelectUI();
+                break;
+            case Mode1.PosSelect:
+                modeSelectUI();
+                break;
+            case Mode1.Meditation:
+                GameManager.Instance.SetMode1(GameManager.Mode1.MeditationSelected);
+                selectedSituation();
+                break;
+            case Mode1.ConsultSelected:
+                GameManager.Instance.SetMode1(GameManager.Mode1.ModeSelect);
+                modeSelectUI();
+                break;
+            case Mode1.Consult:
+                GameManager.Instance.SetMode1(GameManager.Mode1.ConsultSelected);
+                selectedSituation();
+                break;
+
+
+
+        }
+               
+    }
 
 
     public void modeSelectUI()
     {
+
         GameManager.Instance.SetMode1(GameManager.Mode1.ModeSelect);
         player.transform.position = posLobby.transform.position;
         player.transform.rotation = posLobby.transform.rotation;
@@ -239,13 +285,13 @@ public class GameManager : MonoBehaviour
         //player.SetActive(true); // 플레이어 활성화
         //playerCam.SetActive(true); // 플레이어 시점으로 전환
 
-        if (GameManager.Instance.GetMode1() == Mode1.Meditation)
+        if (GameManager.Instance.GetMode1() == Mode1.MeditationSelected)
         {
             spotUIPanel.SetActive(true); // Situation의 UI 켜기
         }
-        
-        else if (GameManager.Instance.GetMode1() == Mode1.Consult)
+        else if (GameManager.Instance.GetMode1() == Mode1.ConsultSelected)
         {
+            
             ConPanel.SetActive(true); // Situation의 UI 켜기
         }
         
@@ -255,7 +301,7 @@ public class GameManager : MonoBehaviour
 
     public void selectMeditation()
     {
-        GameManager.Instance.SetMode1(GameManager.Mode1.Meditation);
+        GameManager.Instance.SetMode1(GameManager.Mode1.MeditationSelected);
         textPanel.SetActive(true);
         //player.transform.position = beachSituation.transform.position;
         selectedSituation();
@@ -265,7 +311,7 @@ public class GameManager : MonoBehaviour
 
     public void selectConsult()
     {
-        GameManager.Instance.SetMode1(GameManager.Mode1.Consult);
+        GameManager.Instance.SetMode1(GameManager.Mode1.ConsultSelected);
         //player.transform.position = mountainSituation.transform.position;
         selectedSituation();
         Debug.Log("SelectCon");
@@ -297,6 +343,7 @@ public class GameManager : MonoBehaviour
 
     public void talkingWithBaby()
     {
+        GameManager.Instance.SetMode1(GameManager.Mode1.Consult);
         ConPanel.SetActive(false);
         talkMainPanel.SetActive(true);
 
@@ -316,6 +363,7 @@ public class GameManager : MonoBehaviour
 
     public void talkingWithPro()
     {
+        GameManager.Instance.SetMode1(GameManager.Mode1.Consult);
         ConPanel.SetActive(false);
         talkMainPanel.SetActive(true);
 
