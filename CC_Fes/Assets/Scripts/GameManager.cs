@@ -8,8 +8,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-
-
     public GameObject startSceneUIPanel; // 시작 화면 UI
     public GameObject spotUIPanel; // 장소선택 UI
     public GameObject textPanel; // 명상 자막 패널
@@ -246,6 +244,10 @@ public class GameManager : MonoBehaviour
             case Mode1.Meditation:
                 GameManager.Instance.SetMode1(GameManager.Mode1.MeditationSelected);
                 selectedSituation();
+                Beach_BGM.Pause(); // 바다 배경 음악
+                Mountain_BGM.Pause(); // 산 배경 음악
+                Beach_Med.Pause(); //바다 명상
+                Mountain_Med.Pause(); //산 명상 
                 break;
             case Mode1.ConsultSelected:
                 GameManager.Instance.SetMode1(GameManager.Mode1.ModeSelect);
@@ -294,6 +296,7 @@ public class GameManager : MonoBehaviour
             
             ConPanel.SetActive(true); // Situation의 UI 켜기
         }
+
         
     }
 
@@ -307,6 +310,8 @@ public class GameManager : MonoBehaviour
         selectedSituation();
         Debug.Log("SelectMed");
 
+       
+        
     }
 
     public void selectConsult()

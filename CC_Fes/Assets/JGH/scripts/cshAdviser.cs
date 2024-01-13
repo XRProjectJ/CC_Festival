@@ -25,10 +25,12 @@ public class cshAdviser : cshChatClass
 
     override public async void CallOpenAI(string prompt)
     {
+        string end = "(세 줄 요약해서 말해줘)";
+        end = prompt + end;
         var askMessage = new ChatMessage()
         {
             Role = "user",
-            Content = prompt
+            Content = end
         };
 
         Debug.Log(prompt);
