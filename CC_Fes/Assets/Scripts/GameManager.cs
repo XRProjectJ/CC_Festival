@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     private bool isMusicPlaying = false; // 음악 재생 여부
 
 
-    public enum Mode1 { ModeSelect, MeditationSelected, ConsultSelected, PosSelect, Meditation, Consult };
+    public enum Mode1 { ModeSelect, MeditationSelected, ConsultSelected, PosSelect, Meditation, Consult, ConsultAF };
     public enum Mode2 { Mountain, Beach };
     public enum Mode3 { PosLobby, Pos1, Pos2 };
     public enum Mode4 { Baby, Consult};
@@ -257,6 +257,13 @@ public class GameManager : MonoBehaviour
                 GameManager.Instance.SetMode1(GameManager.Mode1.ConsultSelected);
                 selectedSituation();
                 break;
+            case Mode1.ConsultAF:
+                Beach_BGM.Pause(); // 바다 배경 음악
+                Mountain_BGM.Pause(); // 산 배경 음악
+                Beach_Med.Pause(); //바다 명상
+                Mountain_Med.Pause(); //산 명상 
+                startMeditation();
+                break;
 
 
 
@@ -365,6 +372,27 @@ public class GameManager : MonoBehaviour
         setText(talkingText_User, Str_User);
         setText(talkingText_Other, Str_Other);
     }
+
+    public void talkingWithBabyAfterMed()
+    {
+        GameManager.Instance.SetMode1(GameManager.Mode1.ConsultAF);
+        MedPanel.SetActive(false); //명상 패널 키기
+        talkMainPanel.SetActive(true);
+
+        askButton_Baby.SetActive(true);
+        askButton_Adviser.SetActive(false);
+        answerButton_Baby.SetActive(true);
+        answerButton_Adviser.SetActive(false);
+        babyPanel_Con.SetActive(true);
+        AdviserPanel_Con.SetActive(false);
+
+        Debug.Log("TalkingWithBaby");
+        Str_Other = "아기랑 대화해요~";
+        Str_User = "말을 걸어보세요";
+        setText(talkingText_User, Str_User);
+        setText(talkingText_Other, Str_Other);
+    }
+
 
     public void talkingWithPro()
     {
